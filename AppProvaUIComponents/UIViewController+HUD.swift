@@ -16,11 +16,11 @@ private var hud: MBProgressHUD?
 
 extension UIViewController {
     
-    func showToast(localizedString: String) {
+    public func showToast(localizedString: String) {
         self.showToast(text: NSLocalizedString(localizedString, comment: ""))
     }
     
-    func showToast(text: String) {
+    public func showToast(text: String) {
         
         hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         let gestureRecognizer = UITapGestureRecognizer()
@@ -34,27 +34,14 @@ extension UIViewController {
         hud?.hide(animated: true, afterDelay: 3.5)
     }
     
-    func dissmissHud() {
+    public func dissmissHud() {
         hud?.hide(animated: true)
     }
     
     // MARK: Loading
     
-    private func getBlurScreenShot() -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, true, 1)
-        self.view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: false)
-        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        //let tintColor = UIColor(white: 1.0, alpha: 0.3) // light
-        let tintColor = UIColor(white: 0.11, alpha: 0.73)
-        //self applyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil
-        //return screenshot.applyExtraLightEffect()
-        //UIColor *tintColor = [UIColor colorWithWhite:0.11 alpha:0.73];
-        return screenshot == nil ? UIImage() :
-            screenshot!.applyBlurWithRadius(5, tintColor: tintColor, saturationDeltaFactor: 1.8, maskImage: nil)
-    }
     
-    func showLoading(_ showProgress: Bool = true){
+    public func showLoading(_ showProgress: Bool = true){
         
         if blurImageView != nil{
             return
@@ -74,7 +61,7 @@ extension UIViewController {
         
     }
     
-    func hideLoading() {
+    public func hideLoading() {
         if (hud != nil) {
             hud?.hide(animated: false)
             hud = nil
@@ -88,6 +75,20 @@ extension UIViewController {
             blurImageView?.removeFromSuperview()
             blurImageView = nil
         }
+    }
+    
+    private func getBlurScreenShot() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, true, 1)
+        self.view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: false)
+        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        //let tintColor = UIColor(white: 1.0, alpha: 0.3) // light
+        let tintColor = UIColor(white: 0.11, alpha: 0.73)
+        //self applyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil
+        //return screenshot.applyExtraLightEffect()
+        //UIColor *tintColor = [UIColor colorWithWhite:0.11 alpha:0.73];
+        return screenshot == nil ? UIImage() :
+            screenshot!.applyBlurWithRadius(5, tintColor: tintColor, saturationDeltaFactor: 1.8, maskImage: nil)
     }
     
 }
