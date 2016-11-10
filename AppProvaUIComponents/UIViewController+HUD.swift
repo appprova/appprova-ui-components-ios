@@ -14,7 +14,7 @@ import MBProgressHUD
 private var blurImageView: UIImageView?
 private var hud: MBProgressHUD?
 
-extension UIViewController {
+public extension UIViewController {
     
     public func showToast(localizedString: String) {
         self.showToast(text: NSLocalizedString(localizedString, comment: ""))
@@ -41,7 +41,7 @@ extension UIViewController {
     // MARK: Loading
     
     
-    public func showLoading(_ showProgress: Bool = true){
+    public func showLoading(_ showProgress: Bool = true) {
         
         if blurImageView != nil{
             return
