@@ -33,17 +33,11 @@ public extension UIViewController {
         
         hud?.hide(animated: true, afterDelay: 3.5)
     }
-    
-    public func dissmissHud() {
-        hud?.hide(animated: true)
-    }
-    
+
     // MARK: Loading
     
-    
-    public func showLoading(_ showProgress: Bool = true) {
-        
-        if blurImageView != nil{
+    public func showBlur() {
+        if blurImageView != nil {
             return
         }
         
@@ -52,16 +46,17 @@ public extension UIViewController {
         blurImageView = UIImageView(image: blurImage)
         self.view.addSubview(blurImageView!)
         
-        if (showProgress) {
-            if hud != nil {
-                hud?.hide(animated: false)
-            }
-            hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        }
-        
     }
     
-    public func hideLoading() {
+    public func showLoading() {
+        self.showBlur()
+        if hud != nil {
+            hud?.hide(animated: false)
+        }
+        hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+    }
+    
+    public func dissmissHud() {
         if (hud != nil) {
             hud?.hide(animated: false)
             hud = nil
