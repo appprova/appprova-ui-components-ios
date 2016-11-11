@@ -56,7 +56,7 @@ public extension UIViewController {
         hud = MBProgressHUD.showAdded(to: self.view, animated: true)
     }
     
-    public func dissmissHud() {
+    public func dismissHud() {
         if (hud != nil) {
             hud?.hide(animated: false)
             hud = nil
