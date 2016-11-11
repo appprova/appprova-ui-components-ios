@@ -24,7 +24,7 @@ public extension UIViewController {
         
         hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         let gestureRecognizer = UITapGestureRecognizer()
-        gestureRecognizer.addTarget(self, action: #selector(dissmissHud))
+        gestureRecognizer.addTarget(self, action: #selector(dismissHud))
         hud?.addGestureRecognizer(gestureRecognizer)
         
         hud?.mode = .text
