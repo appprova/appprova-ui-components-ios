@@ -22,7 +22,7 @@ public extension UIViewController {
         }
         set {
             if _hud != nil {
-                hud?.hide(animated: false)
+                self.dismissHud()
             }
             _hud = newValue
         }
