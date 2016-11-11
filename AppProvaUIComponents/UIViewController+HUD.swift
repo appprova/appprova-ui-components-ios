@@ -12,18 +12,27 @@ import UIKit
 import MBProgressHUD
 
 private var blurImageView: UIImageView?
-private var hud: MBProgressHUD?
+private var _hud: MBProgressHUD?
 
 public extension UIViewController {
+    
+    public var hud:MBProgressHUD? {
+        get {
+            return _hud
+        }
+        set {
+            if _hud != nil {
+                hud?.hide(animated: false)
+            }
+            _hud = newValue
+        }
+    }
     
     public func showToast(localizedString: String) {
         self.showToast(text: NSLocalizedString(localizedString, comment: ""))
     }
     
     public func showToast(text: String) {
-        if hud != nil {
-            hud?.hide(animated: false)
-        }
         hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         let gestureRecognizer = UITapGestureRecognizer()
         gestureRecognizer.addTarget(self, action: #selector(dismissHud))
@@ -52,9 +61,6 @@ public extension UIViewController {
     
     public func showLoading() {
         self.showBlur()
-        if hud != nil {
-            hud?.hide(animated: false)
-        }
         hud = MBProgressHUD.showAdded(to: self.view, animated: true)
     }
     
