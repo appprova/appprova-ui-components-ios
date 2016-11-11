@@ -21,9 +21,7 @@ public extension UIViewController {
             return _hud
         }
         set {
-            if _hud != nil {
-                self.dismissHud()
-            }
+            _hud?.hide(animated: true)
             _hud = newValue
         }
     }
@@ -65,10 +63,7 @@ public extension UIViewController {
     }
     
     public func dismissHud() {
-        if (hud != nil) {
-            hud?.hide(animated: true)
-            hud = nil
-        }
+        hud = nil
         
         let blurTime = 0.4
         
