@@ -21,7 +21,9 @@ public extension UIViewController {
     }
     
     public func showToast(text: String) {
-        
+        if hud != nil {
+            hud?.hide(animated: false)
+        }
         hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         let gestureRecognizer = UITapGestureRecognizer()
         gestureRecognizer.addTarget(self, action: #selector(dismissHud))
