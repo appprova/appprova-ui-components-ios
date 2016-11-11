@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "AppProvaUIComponents"
-  s.version      = "0.0.9"
+  s.version      = "0.0.10"
   s.summary      = "Common UI components used in AppProva projects"
 
   # This description is used to generate tags and improve search results.
