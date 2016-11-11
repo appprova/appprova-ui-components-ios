@@ -66,7 +66,7 @@ public extension UIViewController {
     
     public func dismissHud() {
         if (hud != nil) {
-            hud?.hide(animated: false)
+            hud?.hide(animated: true)
             hud = nil
         }
         
