@@ -21,9 +21,7 @@ public extension UIViewController {
             return _hud
         }
         set {
-            if newValue == nil {
-                self.dismissBlurBackground()
-            }
+            self.dismissBlurBackground()
             _hud?.hide(animated: true)
             _hud = newValue
         }
