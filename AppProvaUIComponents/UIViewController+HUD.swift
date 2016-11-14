@@ -21,7 +21,9 @@ public extension UIViewController {
             return _hud
         }
         set {
-            self.dismissBlurBackground()
+            if (newValue == nil) {
+                self.dismissBlurBackground()
+            }
             _hud?.hide(animated: true)
             _hud = newValue
         }
@@ -32,6 +34,7 @@ public extension UIViewController {
     }
     
     public func showToast(text: String) {
+        self.dismissHud()
         hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         let gestureRecognizer = UITapGestureRecognizer()
         gestureRecognizer.addTarget(self, action: #selector(dismissHud))
@@ -43,7 +46,7 @@ public extension UIViewController {
         
         hud?.hide(animated: true, afterDelay: 3.5)
     }
-
+    
     // MARK: Loading
     
     public func showBlur() {
@@ -65,17 +68,15 @@ public extension UIViewController {
     
     public func dismissHud() {
         hud = nil
-    }
-    
-    private func dismissBlurBackground() {
         let blurTime = 0.4
-        
         UIView.animate(withDuration: blurTime, animations: { () -> Void in
             blurImageView?.alpha = 0.0
-        }) { (_) -> Void in
-            blurImageView?.removeFromSuperview()
-            blurImageView = nil
-        }
+        }, completion: self.dismissBlurBackground)
+    }
+    
+    private func dismissBlurBackground(_ bool:Bool = false) {
+        blurImageView?.removeFromSuperview()
+        blurImageView = nil
     }
     
     private func getBlurScreenShot() -> UIImage? {
