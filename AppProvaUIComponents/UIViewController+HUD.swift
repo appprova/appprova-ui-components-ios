@@ -68,15 +68,16 @@ public extension UIViewController {
     
     public func dismissHud() {
         hud = nil
-        let blurTime = 0.4
-        UIView.animate(withDuration: blurTime, animations: { () -> Void in
-            blurImageView?.alpha = 0.0
-        }, completion: self.dismissBlurBackground)
     }
     
     private func dismissBlurBackground(_ bool:Bool = false) {
-        blurImageView?.removeFromSuperview()
-        blurImageView = nil
+        let blurTime = 0.4
+        UIView.animate(withDuration: blurTime, animations: { () -> Void in
+            blurImageView?.alpha = 0.0
+        }, completion: { _ in
+            blurImageView?.removeFromSuperview()
+            blurImageView = nil
+        })
     }
     
     private func getBlurScreenShot() -> UIImage? {
