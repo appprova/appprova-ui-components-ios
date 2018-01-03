@@ -50,20 +50,21 @@ public extension UIViewController {
     // MARK: Loading
     
     public func showBlur() {
-        if blurImageView != nil {
+        guard let _ = blurImageView else {
             return
         }
         
         let blurImage = self.getBlurScreenShot()
         
         blurImageView = UIImageView(image: blurImage)
-        self.view.addSubview(blurImageView!)
         
+        UIApplication.shared.keyWindow!.addSubview(blurImageView!)
     }
     
     public func showLoading() {
         self.showBlur()
-        hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        hud = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
     }
     
     public func dismissHud() {
