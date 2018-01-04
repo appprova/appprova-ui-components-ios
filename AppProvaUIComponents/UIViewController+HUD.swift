@@ -15,7 +15,7 @@ private var blurImageView: UIImageView?
 private var _hud: MBProgressHUD?
 
 public extension UIViewController {
-    
+
     public var hud:MBProgressHUD? {
         get {
             return _hud
@@ -49,22 +49,24 @@ public extension UIViewController {
     
     // MARK: Loading
     
-    public func showBlur() {
-        guard let _ = blurImageView else {
-            return
-        }
-        
+    public func showBlur(targetView: UIView) {
         let blurImage = self.getBlurScreenShot()
+        let blurScreenShotImageView = UIImageView(image: blurImage)
+        blurImageView = blurScreenShotImageView
         
-        blurImageView = UIImageView(image: blurImage)
-        
-        UIApplication.shared.keyWindow!.addSubview(blurImageView!)
+        targetView.addSubview(blurScreenShotImageView)
     }
     
     public func showLoading() {
-        self.showBlur()
+        guard let keyWindow = UIApplication.shared.keyWindow else {
+            NSLog("The Application key window was not defined. The Background Blur of The Loading view will not be show.")
+            
+            return
+        }
         
-        hud = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+        self.showBlur(targetView: keyWindow)
+        
+        hud = MBProgressHUD.showAdded(to: keyWindow, animated: true)
     }
     
     public func dismissHud() {
